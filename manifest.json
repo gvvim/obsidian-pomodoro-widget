@@ -5,6 +5,6 @@
 	"minAppVersion": "1.4.16",
 	"description": "Provides a widget based on a pomodoro kitchen timer. It's designed to be haptic, and has a constant ticking sound, and an alarm sound that can be toggled.",
 	"author": "gwim",
-	"authorUrl": "github.com/gwim",
+	"authorUrl": "github.com/gvvim",
 	"isDesktopOnly": false
 }
