@@ -32,6 +32,8 @@ export class PomodoroWidgetSettingTab extends PluginSettingTab {
                 .addOption('50','50')
                 .addOption('55','55')
                 .addOption('60','60')
+                .addOption('90','90')
+                .addOption('120','120')
                 .setValue(`${this.plugin.settings.defaultTimerDuration}`)
                 .onChange(async (value) => {
                     this.plugin.settings.defaultTimerDuration = parseInt(value);

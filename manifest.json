@@ -1,10 +1,10 @@
 {
 	"id": "pomodoro-widget",
 	"name": "Pomodoro Widget",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"minAppVersion": "1.4.16",
 	"description": "Provides a widget based on a pomodoro kitchen timer. It's designed to be haptic, and has a constant ticking sound, and an alarm sound that can be toggled.",
-	"author": "bitegw",
-	"authorUrl": "github.com/bitegw",
+	"author": "gwim",
+	"authorUrl": "github.com/gwim",
 	"isDesktopOnly": false
 }

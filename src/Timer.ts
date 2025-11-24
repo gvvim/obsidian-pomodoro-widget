@@ -6,6 +6,7 @@ export default class Timer {
     static readonly NUM_NOTCHES = 16;
     static readonly LONG_NOTCH_MOD = 4;
     static readonly ROTATION_INCREMENT = 180 / this.NUM_NOTCHES;
+    static readonly MAX_MINUTES = 120;
 
 	// Parameters from plugin settings
 	private defaultTimerDuration: number;
@@ -113,7 +114,7 @@ export default class Timer {
 		const durationBtn = controls.createEl('button');
 		durationBtn.addClass('pomo-button');
 		durationBtn.addEventListener('click', () => {
-			const duration = Math.clamp(parseInt(durationInput.value) / 60, 0, 1);
+			const duration = Math.clamp(parseInt(durationInput.value) / 60, 0, Timer.MAX_MINUTES / 60);
 			this.setDurationFromValue(duration);
 		});
 		durationBtn.innerText = 'SET';
@@ -123,7 +124,7 @@ export default class Timer {
 		durationInput.type = 'number';
 		durationInput.step = '1';
 		durationInput.min= '1';
-		durationInput.max= '60';
+		durationInput.max= `${Timer.MAX_MINUTES}`;
 		durationInput.value = `${this.defaultTimerDuration}`;
 
 		this.resetTimer();
@@ -271,7 +272,10 @@ export default class Timer {
     }
 
 	setTimerGradient(angle: number) {
-		this.handleCircle.style.backgroundImage = `conic-gradient(from 270deg, transparent, var(--interactive-accent) ${angle}deg, transparent ${angle + 1}deg)`;
+		if (angle % 360 === 0 && angle !== 0) angle -= 0.001;
+		let baseColor = angle > 360 ? "var(--interactive-accent)" : "transparent";
+		let clampedAngle = Math.clamp(angle % 360, 0, 359);
+		this.handleCircle.style.backgroundImage = `conic-gradient(from 270deg, ${baseColor}, var(--background-modifier-success) ${clampedAngle - 1}deg, ${baseColor} ${clampedAngle}deg)`;
 	}
 
     public onunload() {
@@ -297,7 +301,7 @@ export default class Timer {
 			if(!options.tickingEnabled) {
 				this.tickingSound.pause();
 			} else if(this.isTicking) {
-					this.tickingSound.play();
+				this.tickingSound.play();
 			}
 		}
 	}
